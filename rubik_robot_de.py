@@ -92,26 +92,26 @@ SCRAMBLE_MAX = 20
 
 #____________________globale Variablen___________________________________
 
-state_machine = 0   # 0 = Display Start / Solve
-                    # 1 = Display Setup
-                    # 2 = Display Pattern
-                    # 3 = Display Scramble
-                    # 10 = setup left grip
-                    # 20 = setup left turn 
-                    # 30 = setup right grip 
-                    # 40 = setup right turn
-                    # 50 = setup Load position
-                    # 60 = setup SLEEP (delay) 
-                    # 65 = setup regrip (prior to move a layer)
+state_machine = 0   # 0 = Anzeige Start / Solve
+                    # 1 = Anzeige Setup
+                    # 2 = Anzeige Muster
+                    # 3 = Display Scramble                    
+                    # 10 = links grip einstellen
+                    # 20 = links dreh einstellen
+                    # 30 = rechts grip einstellen
+                    # 40 = rechts dreh einstellen
+                    # 50 = Load einstellen
+                    # 60 = SLEEP (delay) einstellen
+                    # 65 = regrip (prior to move a layer)
                     # 70 = 74 Pattern
-                    # 75 = own Pattern 
-                    # 76 = start own Pattern 
-                    # 77 = scan own Pattern
+                    # 75 = eigenes Muster
+                    # 76 = eigenes Muster starten
+                    # 77 = eigenes Muster scannen
                     # 80 = scramble
-                    # 98 = Display during scambling
+                    # 98 = Display during scambling                    
                     # 99 = running
                     
-timer_time = 0   #actual time
+timer_time = 0   #Laufvariable des Time Thread
   
 l_pos = 90 #position of left Servo
 r_pos = 90
@@ -476,23 +476,23 @@ def create_master_string():
     global solve_array
     global solve_sequenze
     
-    solve_sequenze =""
+    solve_sequenze =""   
     
     for y in range(len(solve_array)):
         
         dummy = move_cube(solve_array[y])
         solve_sequenze = solve_sequenze + dummy  
       
-    solve_sequenze = solve_sequenze.replace("MtaNAaMAbOBaNA", "MtbOBaNA")  #removes redundant gripper turn at 180°
-    solve_sequenze = solve_sequenze.replace("XtbYBbXBaZAbYB", "XtaZAbYB")  #removes redundant gripper turn at 180°
-    solve_sequenze = solve_sequenze.replace("OtaNAaMA","OtaMA")            #removes redundant break gripper turn at 180°  
-    solve_sequenze = solve_sequenze.replace("ZtbYBbXB","ZtbXB")            #removes redundant break gripper turn at 180° 
-    solve_sequenze = solve_sequenze.replace("OtaMAbOBaNA","OtbMBaNA")      #removes redundant gripper turning at 180°
-    solve_sequenze = solve_sequenze.replace("ZtbXBaZAbYB","ZtaXAbYB")      #removes redundant gripper turning at 180°
-    solve_sequenze = solve_sequenze.replace("Aa","")                       #removes redundant gripper close/open 
-    solve_sequenze = solve_sequenze.replace("Bb","")                       #removes redundant gripper close/open 
-    solve_sequenze = solve_sequenze.replace("MtaNM","Mt")                  #removes redundant gripper turn at 90°   
-    solve_sequenze = solve_sequenze.replace("XtbYX","Xt")                  #removes redundant gripper turn at 90°   
+    solve_sequenze = solve_sequenze.replace("MtaNAaMAbOBaNA", "MtbOBaNA")  #entfernt unnötige Greifer Drehung 180°
+    solve_sequenze = solve_sequenze.replace("XtbYBbXBaZAbYB", "XtaZAbYB")  #entfernt unnötige Greifer Drehung 180°
+    solve_sequenze = solve_sequenze.replace("OtaNAaMA","OtaMA")            #entfernt Zwischenstop Greifer Drehung   180°  
+    solve_sequenze = solve_sequenze.replace("ZtbYBbXB","ZtbXB")            #entfernt Zwischenstop Greifer Drehung 180°
+    solve_sequenze = solve_sequenze.replace("OtaMAbOBaNA","OtbMBaNA")      #entfernt unnötige 180° Greifer Drehung 180°
+    solve_sequenze = solve_sequenze.replace("ZtbXBaZAbYB","ZtaXAbYB")      #entfernt unnötige 180° Greifer Drehung 180°
+    solve_sequenze = solve_sequenze.replace("Aa","")                       #entfernt unnötiges Greifer auf/zu
+    solve_sequenze = solve_sequenze.replace("Bb","")                       #entfernt unnötiges Greifer auf/zu
+    solve_sequenze = solve_sequenze.replace("MtaNM","Mt")                  #entfernt unnötige Greifer Drehung 90°   
+    solve_sequenze = solve_sequenze.replace("XtbYX","Xt")                  #entfernt unnötige Greifer Drehung 90°   
     
 #______________________________________________________Drehkorrektur_______________________________________________
 
@@ -543,7 +543,7 @@ def onButtonEvent_plus(plus, event):
     global SLEEP
     global message
     global regrip_stat
-    global scramble_count
+    global scramble_count    
     if event == BUTTON_PRESSED:
         dummy = state_machine
         if dummy == 0:
@@ -592,34 +592,34 @@ def onButtonEvent_plus(plus, event):
                 regrip_stat = 1
         elif dummy == 70:
             state_machine =71
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 71:
             state_machine = 72
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 72:
             state_machine = 73
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 73:
             state_machine = 74
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 74:
             state_machine = 75
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 75:
             state_machine = 70
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 76:
             state_machine = 77
-            message = "Individual"
+            message = "Individuell"
         elif dummy == 77:
             state_machine = 76
-            message = "Individual"
+            message = "Individuell"   
         elif dummy == 80:
             if scramble_count == SCRAMBLE_MAX:
                 scramble_count = 0
             else:
                 scramble_count = scramble_count +1
-            
+
 
 
 def onButtonEvent_minus(minus, event):
@@ -681,33 +681,33 @@ def onButtonEvent_minus(minus, event):
                 regrip_stat = 1                
         elif dummy == 70:
             state_machine = 75
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 75:
             state_machine = 74
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 74:
             state_machine = 73
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 73:
             state_machine = 72
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 72:
             state_machine = 71
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 71:
             state_machine = 70
-            message = "Pattern"
+            message = "Muster"
         elif dummy == 76:
             state_machine = 77
-            message = "Individual"
+            message = "Individuell"
         elif dummy == 77:
             state_machine = 76
-            message = "Individual"    
+            message = "Individuell"
         elif dummy == 80:
             if scramble_count == 0:
                 scramble_count = SCRAMBLE_MAX
             else:
-                scramble_count = scramble_count -1            
+                scramble_count = scramble_count -1                 
 
 def onButtonEvent_enter(enter, event):
     global state_machine
@@ -729,7 +729,7 @@ def onButtonEvent_enter(enter, event):
             setDirection_rechts_turn(90 + rechts_dreh_tune,0.5)
             setDirection_rechts_grip(LOAD + rechts_grip_tune)
             state_machine = 10
-        elif dummy == 2:
+        elif dummy ==2:
             state_machine = 70
         elif dummy == 3:
             state_machine = 80
@@ -803,7 +803,7 @@ def onButtonEvent_enter(enter, event):
                 message = "Start"
                 home_servos()
             except:
-                message = "scan Error"
+                message = "scan Fehler"
                 now = 0
                 home_servos()
         elif dummy == 80:
@@ -815,7 +815,7 @@ def onButtonEvent_enter(enter, event):
                 now = 0
                 scramble()
                 state_machine = 0
-
+                
     elif event == BUTTON_DOUBLECLICKED:
         if state_machine == 0:
             os.exit()
@@ -841,7 +841,7 @@ def Anzeige():
             h,m = divmod(m,60)       
             with canvas(device) as draw:
                 draw.text((5, 0), message,font = font, fill="white")
-                draw.text((5, 40), "Time " + "%02d:%02d" % (m,s), font = font, fill="white")
+                draw.text((5, 40), "Zeit " + "%02d:%02d" % (m,s), font = font, fill="white")
             time.sleep(0.1)
         elif dummy ==1:
             with canvas(device) as draw:
@@ -849,11 +849,11 @@ def Anzeige():
             time.sleep(0.1)
         elif state_machine ==2:
             with canvas(device) as draw:
-                draw.text((5, 20), "Pattern ",font = font, fill="white")
-            time.sleep(0.1)
+                draw.text((5, 20), "Muster ",font = font, fill="white")
+            time.sleep(0.1)            
         elif state_machine ==3:
             with canvas(device) as draw:
-                draw.text((5, 20), "Scramble ",font = font, fill="white")
+                draw.text((5, 20), "Verdrehen ",font = font, fill="white")
             time.sleep(0.1)                        
         elif state_machine == 10:
             with canvas(device) as draw:
@@ -862,7 +862,7 @@ def Anzeige():
             time.sleep(0.1)
         elif state_machine == 20:
             with canvas(device) as draw:
-                draw.text((5, 0), "L. Turn ", font = font, fill="white")
+                draw.text((5, 0), "L. Dreh ", font = font, fill="white")
                 draw.text((5, 40), str(links_dreh_tune), font = font, fill="white")
             time.sleep(0.1)
         elif state_machine == 30:
@@ -872,7 +872,7 @@ def Anzeige():
             time.sleep(0.1)
         elif state_machine == 40:
             with canvas(device) as draw:
-                draw.text((5, 0), "R. Turn " , font = font, fill="white")
+                draw.text((5, 0), "R. Dreh " , font = font, fill="white")
                 draw.text((5, 40), str(rechts_dreh_tune), font = font, fill="white")
             time.sleep(0.1)
         elif state_machine == 50:
@@ -898,7 +898,7 @@ def Anzeige():
         elif state_machine == 71:
             with canvas(device) as draw:
                 draw.text((5, 0), message , font = font, fill="white")
-                draw.text((5, 40), "Cross", font = font, fill="white")
+                draw.text((5, 40), "Kreuz", font = font, fill="white")
             time.sleep(0.1) 
         elif state_machine == 72:
             with canvas(device) as draw:
@@ -908,36 +908,36 @@ def Anzeige():
         elif state_machine == 73:
             with canvas(device) as draw:
                 draw.text((5, 0), message , font = font, fill="white")
-                draw.text((5, 40), "Snake", font = font, fill="white")
+                draw.text((5, 40), "Schlange", font = font, fill="white")
             time.sleep(0.1) 
         elif state_machine == 74:
             with canvas(device) as draw:
                 draw.text((5, 0), message , font = font, fill="white")
-                draw.text((5, 40), "Pyramid", font = font, fill="white")
+                draw.text((5, 40), "Pyramide", font = font, fill="white")
             time.sleep(0.1)             
         elif state_machine == 75:
             with canvas(device) as draw:
                 draw.text((5, 0), message , font = font, fill="white")
-                draw.text((5, 40), "Individual", font = font, fill="white")
+                draw.text((5, 40), "Individuell", font = font, fill="white")
             time.sleep(0.1)             
         elif state_machine == 76:
             with canvas(device) as draw:
-                draw.text((5, 0), "Individual" , font = font, fill="white")
-                draw.text((5, 40), "Start", font = font, fill="white")
+                draw.text((5, 0), "Individuell" , font = font, fill="white")
+                draw.text((5, 40), "Starten", font = font, fill="white")
             time.sleep(0.1)             
         elif state_machine == 77:
             with canvas(device) as draw:
-                if message != "scan Error":
-                    draw.text((5, 0), "Individual" , font = font, fill="white")
-                    draw.text((5, 40), "Scan", font = font, fill="white")
+                if message != "scan Fehler":
+                    draw.text((5, 0), "Individuell" , font = font, fill="white")
+                    draw.text((5, 40), "Scannen", font = font, fill="white")
                 else:
-                    draw.text((5, 0), "Individual" , font = font, fill="white")
+                    draw.text((5, 0), "Individuell" , font = font, fill="white")
                     draw.text((5, 40), message, font = font, fill="white")                    
-            time.sleep(0.1)
+            time.sleep(0.1)             
         elif state_machine == 80:
             with canvas(device) as draw:
-                draw.text((5, 0), "Scramble" , font = font, fill="white")
-                draw.text((5, 40), "Count  :" + str(scramble_count), font = font, fill="white")
+                draw.text((5, 0), "Verdrehen" , font = font, fill="white")
+                draw.text((5, 40), "Anzahl :" + str(scramble_count), font = font, fill="white")
             time.sleep(0.1)             
 
         elif state_machine == 98:
@@ -946,7 +946,7 @@ def Anzeige():
             m,s = divmod(now,60)
             h,m = divmod(m,60)       
             with canvas(device) as draw:
-                draw.text((5, 0), "Scramble", font = font, fill="white")
+                draw.text((5, 0), "Verdrehen", font = font, fill="white")
                 draw.text((5, 40), message , font = font, fill="white")
             time.sleep(0.2)
 
@@ -959,7 +959,7 @@ def Anzeige():
             h,m = divmod(m,60)       
             with canvas(device) as draw:
                 draw.text((5, 0), message, font = font, fill="white")
-                draw.text((5, 40), "Time " + "%02d:%02d" % (m,s), font = font, fill="white")
+                draw.text((5, 40), "Zeit " + "%02d:%02d" % (m,s), font = font, fill="white")
             time.sleep(0.2)
                     
 #__________________________________________________________________Wxrfel einlesen_____________________________________
@@ -1308,11 +1308,11 @@ def setup():
 
 def scan_cube():
     global message
-    message = "Scan"
+    message = "Einlesen"
     
     get_cube() 
     
-    message = "Analysis"
+    message = "Analyse"
     
     solution = get_sticker()
 
@@ -1410,11 +1410,11 @@ while endless == 1:
     now=0
     isRunning = True
     timer_time = 0
-    message = "Scan"
+    message = "Einlesen"
     
     get_cube() 
     
-    message = "Analysis"
+    message = "Analyse"
     
     solution = get_sticker()
 
@@ -1425,7 +1425,7 @@ while endless == 1:
         else:
             solve_string = kociemba.solve(solution,Target_string)
     except:
-        message = "Scan Error!"
+        message = "Farbfehler!"
         state_machine=0
         print(solve_string)
         continue
