@@ -10,9 +10,9 @@ scanning and solving of a Cube with any color configuration (no logo on sticker)
 
 solving to 4 implemented pattern.
 
-scanning of own pattern and store as a own pattern for solving cubes. With this function a copy of a cube can be generated.
+scanning and store of own pattern. With this function a copy of a cube can be generated.
 
-scramble cube with given number of moves
+scramble cube with given number of moves.
 
 
 Mechanical setup is placed on Thingiverse:
