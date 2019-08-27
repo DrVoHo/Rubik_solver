@@ -1,5 +1,7 @@
 # button.py
 
+# source: http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/switches.inc.php
+
 import RPi.GPIO as GPIO
 import time
 from threading import Thread
