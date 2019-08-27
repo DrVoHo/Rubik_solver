@@ -831,7 +831,7 @@ def onButtonEvent_enter(enter, event):
 def Anzeige():
     global now
     i=0
-    font = ImageFont.truetype(HOME + 'scripts/font/VCR_OSD_MONO_1.001.ttf',20)
+#    font = ImageFont.truetype(HOME + 'scripts/font/VCR_OSD_MONO_1.001.ttf',20)
 
     with canvas(device) as draw:
         draw.text((5, 0), "Boot ",font = font, fill="white")
@@ -1262,6 +1262,7 @@ def setup():
 
     if not os.path.exists(HOME + "Cube"):
         os.makedirs(HOME + "Cube")
+        os.chmod(HOME + "Cube",0o777)
         
     if os.path.exists(HOME + "Own_pattern.txt"):
         f=open(HOME + "Own_pattern.txt", 'r')
