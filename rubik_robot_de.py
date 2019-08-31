@@ -771,7 +771,7 @@ def onButtonEvent_enter(enter, event):
             now = 0
             regrip()
         elif dummy == 71:
-            Target_string = "UDUDUDUDURLRLRLRLRFBFBFBFBFDUDUDUDUDLRLRLRLRLBFBFBFBFB" # cross
+            Target_string = "UBULURUFURURFRBRDRFUFLFRFDFDFDLDRDBDLULBLFLDLBUBRBLBDB" # super flip
             state_machine = 99
             now = 0
             regrip()
@@ -900,7 +900,7 @@ def Anzeige():
         elif state_machine == 71:
             with canvas(device) as draw:
                 draw.text((5, 0), message , font = font, fill="white")
-                draw.text((5, 40), "Kreuz", font = font, fill="white")
+                draw.text((5, 40), "Super Flip", font = font, fill="white")
             time.sleep(0.1) 
         elif state_machine == 72:
             with canvas(device) as draw:
