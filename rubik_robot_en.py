@@ -51,7 +51,24 @@ LINKS_GRIP = 38
 RECHTS_DREH = 18
 RECHTS_GRIP = 16
 
-C180 = 1  # 1 = 180° turn servo; else = 90°
+C180 = 0  # 1 = 270° turn servo; else = 180° (standard)
+
+GRIPPER_MAX = 65
+GRIPPER_MIN = 0
+TURN_MAX = 180 + 90 * C180
+TURN_MIN = 0
+
+SLEEP_GRIP = 0.3
+SLEEP_LONG_FAKTOR = 2
+
+OVERSHOOT = 5 #overshoot at turning
+
+fPWM = 50 
+
+SERVO_PWM = 10  # servo with 180° 
+SERVO_OFFSET = 2
+
+SCRAMBLE_MAX = 20
 
 
 IMG_BREITE = 1080 
@@ -74,22 +91,6 @@ pxl_locs = [[(lft_col_pxl, top_row_pxl),(mid_col_pxl, top_row_pxl),(rgt_col_pxl,
 
 TARGET_STANDARD = "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"
 
-GRIPPER_MAX = 65
-GRIPPER_MIN = 0
-TURN_MAX = 270
-TURN_MIN = 0
-
-SLEEP_GRIP = 0.3
-SLEEP_LONG_FAKTOR = 2
-
-OVERSHOOT = 5 #overshoot at turning
-
-fPWM = 50 
-
-SERVO_PWM = 10  # servo with 270° 
-SERVO_OFFSET = 2.5
-
-SCRAMBLE_MAX = 20
 
 
 #____________________globale Variablen___________________________________
