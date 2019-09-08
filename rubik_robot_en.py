@@ -42,20 +42,20 @@ import kociemba
 
 GPIO.setmode(GPIO.BOARD)       
 
-PLUS_BUTTON = 33    # adapt to your wiring
-MINUS_BUTTON = 29     
-ENTER_BUTTON = 40
+PLUS_BUTTON = 11    # adapt to your wiring
+MINUS_BUTTON = 13   # adapt to your wiring  
+ENTER_BUTTON = 15   # adapt to your wiring
 
-LINKS_DREH = 36 
-LINKS_GRIP = 38 
-RECHTS_DREH = 18
-RECHTS_GRIP = 16
+LINKS_DREH = 36     # Left turn servo - adapt to your wiring
+LINKS_GRIP = 37     # Left grip servo - adapt to your wiring
+RECHTS_DREH = 18    # Right turn servo - adapt to your wiring
+RECHTS_GRIP = 16    # Right grip servo - adapt to your wiring
 
-C180 = 0  # 1 = 270° turn servo; else = 180° (standard)
+C180 = 0  # 1 = 180° turn of gripper; else = 90° (standard)
 
 GRIPPER_MAX = 65
 GRIPPER_MIN = 0
-TURN_MAX = 180 + 90 * C180
+TURN_MAX = 180 #max turn angle of servo
 TURN_MIN = 0
 
 SLEEP_GRIP = 0.3
@@ -63,10 +63,10 @@ SLEEP_LONG_FAKTOR = 2
 
 OVERSHOOT = 5 #overshoot at turning
 
-fPWM = 50 
+fPWM = 50 # servo PWM frequency; 20 ms duration
 
-SERVO_PWM = 10  # servo with 180° 
-SERVO_OFFSET = 2
+SERVO_PWM = 10  # difference of servotiming in percentage of duration 
+SERVO_OFFSET = 2 # lower servo position in percentage of duration
 
 SCRAMBLE_MAX = 20
 
@@ -137,6 +137,8 @@ Own_pattern = TARGET_STANDARD
 regrip_stat = 1
 
 scramble_count = 0
+
+message = ""
 
  #____________________________________________________timer__________________
  

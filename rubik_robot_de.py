@@ -4,6 +4,8 @@
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306
+
+
 from PIL import ImageFont
 from PIL import Image
 
@@ -42,20 +44,20 @@ import kociemba
 
 GPIO.setmode(GPIO.BOARD)       
 
-PLUS_BUTTON = 33    # adapt to your wiring
-MINUS_BUTTON = 29     
-ENTER_BUTTON = 40
+PLUS_BUTTON = 11    # an die gewählten GPIO anpassen
+MINUS_BUTTON = 13   # an die gewählten GPIO anpassen  
+ENTER_BUTTON = 15  # an die gewählten GPIO anpassen
 
-LINKS_DREH = 36 
-LINKS_GRIP = 38 
-RECHTS_DREH = 18
-RECHTS_GRIP = 16
+LINKS_DREH = 36   # an die gewählten GPIO anpassen
+LINKS_GRIP = 37   # an die gewählten GPIO anpassen
+RECHTS_DREH = 18  # an die gewählten GPIO anpassen
+RECHTS_GRIP = 16  # an die gewählten GPIO anpassen
 
-C180 = 0   # 1 = 270° turn servo; else = 180° (standard)
+C180 = 0   # 1 = 180° Drehbewegung (mind. 270 ° Servo); else = 90° (standard)
 
 GRIPPER_MAX = 65
 GRIPPER_MIN = 0
-TURN_MAX = 180 + 90 * C180
+TURN_MAX = 180   # max Drehwinkel des Servox
 TURN_MIN = 0
 
 SLEEP_GRIP = 0.3
@@ -63,10 +65,10 @@ SLEEP_LONG_FAKTOR = 2
 
 OVERSHOOT = 5 #overshoot at turning
 
-fPWM = 50 
+fPWM = 50   # Servo PWM Frequenz; 20 ms Dauer
 
-SERVO_PWM = 10  # servo with 180° 
-SERVO_OFFSET = 2
+SERVO_PWM = 10  # Differenz Servopositionen in Prozent von der PWM Dauer 
+SERVO_OFFSET = 2 # untere Servoposition in Prozent von der PWM Dauer
 
 SCRAMBLE_MAX = 20
 
@@ -137,6 +139,8 @@ Own_pattern = TARGET_STANDARD
 regrip_stat = 1
 
 scramble_count = 0
+
+message = ""
 
  #____________________________________________________timer__________________
  
@@ -496,6 +500,8 @@ def create_master_string():
     solve_sequenze = solve_sequenze.replace("Bb","")                       #entfernt unnötiges Greifer auf/zu
     solve_sequenze = solve_sequenze.replace("MtaNM","Mt")                  #entfernt unnötige Greifer Drehung 90°   
     solve_sequenze = solve_sequenze.replace("XtbYX","Xt")                  #entfernt unnötige Greifer Drehung 90°   
+
+
     
 #______________________________________________________Drehkorrektur_______________________________________________
 
