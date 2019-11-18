@@ -55,7 +55,7 @@ C180 = 0  # 1 = 180° turn of gripper; else = 90° (standard)
 
 GRIPPER_MAX = 65
 GRIPPER_MIN = 0
-TURN_MAX = 180 #max turn angle of servo
+TURN_MAX = 270 #max turn angle of servo - limit for setup
 TURN_MIN = 0
 
 SLEEP_GRIP = 0.3
@@ -65,8 +65,21 @@ OVERSHOOT = 5 #overshoot at turning
 
 fPWM = 50 # servo PWM frequency; 20 ms duration
 
-SERVO_PWM = 10  # difference of servotiming in percentage of duration 
-SERVO_OFFSET = 2 # lower servo position in percentage of duration
+TURN_MAX_left_grip = 180
+SERVO_PWM_left_grip = 10  # difference of servotiming in percentage of duration 
+SERVO_OFFSET_left_grip = 2 # lower servo position in percentage of duration
+
+TURN_MAX_left_turn = 180
+SERVO_PWM_left_turn = 10  # difference of servotiming in percentage of duration 
+SERVO_OFFSET_left_turn = 2 # lower servo position in percentage of duration
+
+TURN_MAX_right_grip = 180
+SERVO_PWM_right_grip = 10  # difference of servotiming in percentage of duration 
+SERVO_OFFSET_right_grip = 2 # lower servo position in percentage of duration
+
+TURN_MAX_right_turn = 180
+SERVO_PWM_right_turn = 10  # difference of servotiming in percentage of duration 
+SERVO_OFFSET_right_turn = 2 # lower servo position in percentage of duration
 
 SCRAMBLE_MAX = 20
 
@@ -191,36 +204,36 @@ def home_servos():
 
 
 def regrip():
-    duty = SERVO_PWM / TURN_MAX * (LOAD + links_grip_tune) + SERVO_OFFSET
+    duty = SERVO_PWM_left_grip / TURN_MAX_left_grip * (LOAD + links_grip_tune) + SERVO_OFFSET_left_grip
     links_grip_servo.ChangeDutyCycle(duty)
-    duty = SERVO_PWM / TURN_MAX * (LOAD + rechts_grip_tune) + SERVO_OFFSET
+    duty = SERVO_PWM_right_grip / TURN_MAX_right_grip * (LOAD + rechts_grip_tune) + SERVO_OFFSET_right_grip
     rechts_grip_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP/2)
-    duty = SERVO_PWM / TURN_MAX * links_grip_tune + SERVO_OFFSET
+    duty = SERVO_PWM_left_grip / TURN_MAX_left_grip * links_grip_tune + SERVO_OFFSET_left_grip
     links_grip_servo.ChangeDutyCycle(duty)
-    duty = SERVO_PWM / TURN_MAX * rechts_grip_tune + SERVO_OFFSET
+    duty = SERVO_PWM_right_grip / TURN_MAX_right_grip * rechts_grip_tune + SERVO_OFFSET_right_grip
     rechts_grip_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP/2)
 
 def setDirection_links_turn(richtung, faktor): 
-    duty = SERVO_PWM / TURN_MAX * (richtung  + OVERSHOOT) + SERVO_OFFSET
+    duty = SERVO_PWM_left_turn / TURN_MAX_left_turn * (richtung  + OVERSHOOT) + SERVO_OFFSET_left_turn
     links_turn_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP*faktor) # allow to settle  
     
 def setDirection_links_grip(richtung):
-    duty = SERVO_PWM / TURN_MAX * richtung + SERVO_OFFSET
+    duty = SERVO_PWM_left_grip / TURN_MAX_left_grip * richtung + SERVO_OFFSET_left_grip
     links_grip_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP_GRIP) # allow to settle 
 
     
 def setDirection_rechts_turn(richtung,faktor):
-    duty = SERVO_PWM / TURN_MAX * (richtung  + OVERSHOOT) + SERVO_OFFSET
+    duty = SERVO_PWM_right_turn / TURN_MAX_right_turn * (richtung  + OVERSHOOT) + SERVO_OFFSET_right_turn
     rechts_turn_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP*faktor) # allow to settle 
  
     
 def setDirection_rechts_grip(richtung):
-    duty = SERVO_PWM / TURN_MAX * richtung + SERVO_OFFSET
+    duty = SERVO_PWM_right_grip / TURN_MAX_right_grip * richtung + SERVO_OFFSET_right_grip
     rechts_grip_servo.ChangeDutyCycle(duty)
     time.sleep(SLEEP_GRIP) # allow to settle 
 
