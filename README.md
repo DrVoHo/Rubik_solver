@@ -17,3 +17,5 @@ scramble cube with given number of moves.
 
 Mechanical setup is placed on Thingiverse:
 https://www.thingiverse.com/thing:3826740
+
+Second version with PCA9685 PWM driver. Ensures stable servo action (no jitter)
