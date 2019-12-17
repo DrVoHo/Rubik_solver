@@ -575,28 +575,28 @@ def onButtonEvent_plus(plus, event):
             message = "Start"
         elif state_machine == 10:  # links grip wird eingestellt
             links_grip_tune = links_grip_tune + 2
-            if links_grip_tune > GRIPPER_MAX:
-                links_grip_tune = GRIPPER_MAX
+#            if links_grip_tune > GRIPPER_MAX:
+#                links_grip_tune = GRIPPER_MAX
             setDirection_links_grip(links_grip_tune)
         elif state_machine == 20: # links dreh wird eingestellt
             links_dreh_tune = links_dreh_tune + 2
-            if links_dreh_tune + 180 > TURN_MAX:
-                links_dreh_tune = TURN_MAX-180
+#            if links_dreh_tune + 180 > TURN_MAX:
+#                links_dreh_tune = TURN_MAX-180
             setDirection_links_turn(90 + links_dreh_tune,0.5)
         elif state_machine == 30:  #rechts grip wird eingestellt
             rechts_grip_tune = rechts_grip_tune + 2
-            if rechts_grip_tune > GRIPPER_MAX:
-                rechts_grip_tune = GRIPPER_MAX
+#            if rechts_grip_tune > GRIPPER_MAX:
+#                rechts_grip_tune = GRIPPER_MAX
             setDirection_rechts_grip(rechts_grip_tune)
         elif state_machine == 40:  #rechts dreh wird eingestellt
             rechts_dreh_tune = rechts_dreh_tune + 2
-            if rechts_dreh_tune + 180 > TURN_MAX:
-                rechts_dreh_tune = TURN_MAX-180
+#            if rechts_dreh_tune + 180 > TURN_MAX:
+#                rechts_dreh_tune = TURN_MAX-180
             setDirection_rechts_turn(90 + rechts_dreh_tune,0.5) 
         elif state_machine == 50:  #Load wird eingestellt
             LOAD = LOAD +2 
-            if LOAD > GRIPPER_MAX:
-                LOAD = GRIPPER_MAX
+#            if LOAD > GRIPPER_MAX:
+#                LOAD = GRIPPER_MAX
             setDirection_links_grip(LOAD + links_grip_tune)
             setDirection_rechts_grip(LOAD + rechts_grip_tune) 
         elif state_machine == 60:  # SLEEP wird eingestellt
