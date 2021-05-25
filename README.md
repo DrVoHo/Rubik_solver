@@ -18,7 +18,7 @@ Speedcubing Trainer.
 ALL OLL and PLL patterns are implemented:
 https://www.speedsolving.com/wiki/index.php/Main_Page
 
-Starting with a solved cube, you can train a specific pattern or train by random generated tasks. Top color is not equal an all patterns - but that is what you need to train as well.
+Starting with a solved cube, you can train a specific pattern or train by random generated tasks. Top color is not equal on all patterns - but that is what you need to train as well.
 You can change the training database by eding "Speedcubing.txt". 
 
 
