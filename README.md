@@ -14,6 +14,13 @@ scanning and store of own pattern. With this function a copy of a cube can be ge
 
 scramble cube with given number of moves.
 
+Speedcubing Trainer.
+ALL OLL and PLL patterns are implemented:
+https://www.speedsolving.com/wiki/index.php/Main_Page
+
+You can train a specific pattern or train by random generated tasks.
+You can change the training database by eding "Speedcubing.txt". 
+
 
 Mechanical setup is placed on Thingiverse:
 https://www.thingiverse.com/thing:3826740
