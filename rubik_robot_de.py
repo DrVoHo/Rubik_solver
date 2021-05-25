@@ -39,6 +39,10 @@ from button import  Button, BUTTON_PRESSED,  BUTTON_DOUBLECLICKED
 
 import kociemba
 
+import Trainer as train
+
+train.init()
+
 
 #_______________Konstanten________________
 
@@ -67,19 +71,19 @@ OVERSHOOT = 5 #overshoot at turning
 
 fPWM = 50   # Servo PWM Frequenz; 20 ms Dauer
 
-TURN_MAX_left_grip = 180
+TURN_MAX_left_grip = 180 + C180*90
 SERVO_PWM_left_grip = 10  # difference of servotiming in percentage of duration 
 SERVO_OFFSET_left_grip = 2 # lower servo position in percentage of duration
 
-TURN_MAX_left_turn = 180
+TURN_MAX_left_turn = 180 + C180*90
 SERVO_PWM_left_turn = 10  # difference of servotiming in percentage of duration 
 SERVO_OFFSET_left_turn = 2 # lower servo position in percentage of duration
 
-TURN_MAX_right_grip = 180
+TURN_MAX_right_grip = 180 + C180*90
 SERVO_PWM_right_grip = 10  # difference of servotiming in percentage of duration 
 SERVO_OFFSET_right_grip = 2 # lower servo position in percentage of duration
 
-TURN_MAX_right_turn = 180
+TURN_MAX_right_turn = 180 + C180*90
 SERVO_PWM_right_turn = 10  # difference of servotiming in percentage of duration 
 SERVO_OFFSET_right_turn = 2 # lower servo position in percentage of duration
 
@@ -126,6 +130,8 @@ state_machine = 0   # 0 = Anzeige Start / Solve
                     # 76 = eigenes Muster starten
                     # 77 = eigenes Muster scannen
                     # 80 = scramble
+					# 85 = Training   mit Trainindex
+					# 97 = Display during Training
                     # 98 = Display during scambling                    
                     # 99 = running
                     
@@ -513,8 +519,6 @@ def create_master_string():
     solve_sequenze = solve_sequenze.replace("Bb","")                       #entfernt unnötiges Greifer auf/zu
     solve_sequenze = solve_sequenze.replace("MtaNM","Mt")                  #entfernt unnötige Greifer Drehung 90°   
     solve_sequenze = solve_sequenze.replace("XtbYX","Xt")                  #entfernt unnötige Greifer Drehung 90°   
-
-
     
 #______________________________________________________Drehkorrektur_______________________________________________
 
@@ -566,6 +570,7 @@ def onButtonEvent_plus(plus, event):
     global message
     global regrip_stat
     global scramble_count    
+    global Trainindex
     if event == BUTTON_PRESSED:
         dummy = state_machine
         if dummy == 0:
@@ -575,6 +580,8 @@ def onButtonEvent_plus(plus, event):
         elif dummy == 2:
             state_machine = 3 
         elif dummy == 3:
+            state_machine = 4
+        elif dummy == 4:
             state_machine = 0
             message = "Start"
         elif state_machine == 10:  # links grip wird eingestellt
@@ -584,23 +591,23 @@ def onButtonEvent_plus(plus, event):
             setDirection_links_grip(links_grip_tune)
         elif state_machine == 20: # links dreh wird eingestellt
             links_dreh_tune = links_dreh_tune + 2
-#            if links_dreh_tune + 180 > TURN_MAX:
-#                links_dreh_tune = TURN_MAX-180
+ #           if links_dreh_tune + 180 > TURN_MAX:
+ #               links_dreh_tune = TURN_MAX-180
             setDirection_links_turn(90 + links_dreh_tune,0.5)
         elif state_machine == 30:  #rechts grip wird eingestellt
             rechts_grip_tune = rechts_grip_tune + 2
-#            if rechts_grip_tune > GRIPPER_MAX:
-#                rechts_grip_tune = GRIPPER_MAX
+ #           if rechts_grip_tune > GRIPPER_MAX:
+ #               rechts_grip_tune = GRIPPER_MAX
             setDirection_rechts_grip(rechts_grip_tune)
         elif state_machine == 40:  #rechts dreh wird eingestellt
             rechts_dreh_tune = rechts_dreh_tune + 2
-#            if rechts_dreh_tune + 180 > TURN_MAX:
-#                rechts_dreh_tune = TURN_MAX-180
+ #           if rechts_dreh_tune + 180 > TURN_MAX:
+ #               rechts_dreh_tune = TURN_MAX-180
             setDirection_rechts_turn(90 + rechts_dreh_tune,0.5) 
         elif state_machine == 50:  #Load wird eingestellt
             LOAD = LOAD +2 
-            if LOAD > GRIPPER_MAX:
-                LOAD = GRIPPER_MAX
+ #           if LOAD > GRIPPER_MAX:
+ #               LOAD = GRIPPER_MAX
             setDirection_links_grip(LOAD + links_grip_tune)
             setDirection_rechts_grip(LOAD + rechts_grip_tune) 
         elif state_machine == 60:  # SLEEP wird eingestellt
@@ -641,8 +648,14 @@ def onButtonEvent_plus(plus, event):
                 scramble_count = 0
             else:
                 scramble_count = scramble_count +1
-
-
+        elif dummy == 85:
+            message = "Training"
+            
+            if Trainindex == train.Trainingliste:
+                Trainindex = 0
+            else:
+                Trainindex = Trainindex + 1
+			
 
 def onButtonEvent_minus(minus, event):
     global state_machine
@@ -655,9 +668,12 @@ def onButtonEvent_minus(minus, event):
     global message
     global regrip_stat
     global scramble_count
+    global Trainindex
     if event == BUTTON_PRESSED:
         dummy = state_machine
         if dummy == 0:
+            state_machine = 4
+        elif dummy == 4:
             state_machine = 3
         elif dummy == 3:
             state_machine = 2
@@ -729,7 +745,13 @@ def onButtonEvent_minus(minus, event):
             if scramble_count == 0:
                 scramble_count = SCRAMBLE_MAX
             else:
-                scramble_count = scramble_count -1                 
+                scramble_count = scramble_count -1  
+        elif dummy == 85:
+            message = "Training"
+            if Trainindex == 0:
+                Trainindex = train.Trainingliste
+            else:
+                Trainindex = Trainindex - 1			
 
 def onButtonEvent_enter(enter, event):
     global state_machine
@@ -755,16 +777,18 @@ def onButtonEvent_enter(enter, event):
             state_machine = 70
         elif dummy == 3:
             state_machine = 80
-        elif dummy == 10:
+        elif dummy == 4:
+            state_machine = 85
+        elif dummy == 10: # set left grip finished
             setDirection_links_grip(LOAD + links_grip_tune)   
             state_machine = 20
-        elif dummy == 20:
+        elif dummy == 20: # set left turn finished
             state_machine = 30
             setDirection_rechts_grip(rechts_grip_tune)           
-        elif dummy == 30:
+        elif dummy == 30: # set right grip finished
             setDirection_rechts_grip(LOAD + rechts_grip_tune)            
             state_machine = 40
-        elif dummy == 40:
+        elif dummy == 40: #set right turn finished
             state_machine = 50
             setDirection_links_grip(LOAD + links_grip_tune)
             setDirection_rechts_grip(LOAD + rechts_grip_tune)        
@@ -836,12 +860,16 @@ def onButtonEvent_enter(enter, event):
                 state_machine = 98
                 now = 0
                 scramble()
-                state_machine = 0
+                state_machine = 80
+        elif dummy == 85:
+            state_machine = 97
+            training()
+            state_machine = 85
                 
     elif event == BUTTON_DOUBLECLICKED:
         if state_machine == 0:
             os.exit()
-        if state_machine == 99 or state_machine == 98:
+        if state_machine == 99 or state_machine == 98 or state_machine == 97 or state_machine == 80 or state_machine == 85:
             state_machine = 0
 		   
 #______________________________________________________________________Display__________________________________________
@@ -876,6 +904,10 @@ def Anzeige():
         elif state_machine ==3:
             with canvas(device) as draw:
                 draw.text((5, 20), "Verdrehen ",font = font, fill="white")
+            time.sleep(0.1)                        
+        elif state_machine ==4:
+            with canvas(device) as draw:
+                draw.text((5, 20), "Training ",font = font, fill="white")
             time.sleep(0.1)                        
         elif state_machine == 10:
             with canvas(device) as draw:
@@ -962,6 +994,18 @@ def Anzeige():
                 draw.text((5, 40), "Anzahl :" + str(scramble_count), font = font, fill="white")
             time.sleep(0.1)             
 
+        elif state_machine == 85:
+            with canvas(device) as draw:
+                draw.text((5, 0), "Training" , font = font, fill="white")
+                if Trainindex == 0:
+                    draw.text((5, 40), "Random ", font = font, fill="white")
+                else:	
+                    draw.text((5, 40), train.Training_pattern[int((Trainindex-1)*2)], font = font, fill="white")
+            time.sleep(0.1)             
+		
+        elif state_machine == 97:
+            time.sleep(0.2)
+		
         elif state_machine == 98:
             if isRunning:
                 now = timer_time
@@ -1052,6 +1096,8 @@ def get_cube():
 
 #    RTp()
 
+    regrip()
+	
     single_action("b")
     single_action("X")
     single_action("B")
@@ -1377,6 +1423,56 @@ def scramble():
     
     create_master_string()    
     
+    regrip()
+    
+    for x in solve_sequenze:
+        single_action(x)
+        message = "Rest: " + str(moves)
+        if state_machine == 0:  #DOUBLECLICK auf rechtsbutton
+
+            break        
+    message = "Start"
+    now = 0
+    home_servos()
+
+#___________________________________________Training________________________________________
+def training():
+    global moves
+    global solve_array
+    global solve_sequenze
+    global message
+    global now
+    global Trainindex
+	
+    Trainvalue = 1
+
+    if Trainindex==0:
+        Trainvalue = random.randint(1,train.Trainingliste)
+    else:
+        Trainvalue = Trainindex
+		
+	
+    solve_array = train.Training_pattern[int((Trainvalue-1)*2)+1].split(" ")
+    print(train.Training_pattern[int((Trainvalue-1)*2)])
+    print(solve_array)
+    
+    if solve_array[2]=="F" or solve_array[2]=="F'":  #index 2 wegen Probleme beim Entfernen der unnötigen Würfeldrehungen in Trainer.py
+        correct_right()
+        correct_right()
+        correct_right()
+    elif solve_array[2]=="U" or solve_array[2]=="U'":
+        correct_right()
+        correct_right()
+    elif solve_array[2]=="B" or solve_array[2]=="B'":
+        correct_right()
+
+    elif solve_array[2]=="L" or solve_array[2]=="L'":
+        correct_left()
+	
+    moves=len(solve_array)-1
+    
+    create_master_string()    
+	
     regrip()
     
     for x in solve_sequenze:

@@ -1,0 +1,156 @@
+OLL1
+R U B' R B R2 U' R' F R F'
+OLL2
+F (R U R' U') F' f (R U R' U') f'
+OLL3
+y f (R U R' U') f' U' F (R U R' U') F'
+OLL4
+f (R U R' U') f' U F (R U R' U') F'
+OLL5
+(r' U2) (R U R' U r)
+OLL6
+y2 (r U2) (R' U' R U') r'
+OLL7
+r U R' U R U2 r'
+OLL8
+y2 r' U' R U' R' U2 r
+OLL9
+y' R' U' R y' x' R U' R' F R U R' x
+OLL10
+y' R U R' y R' F R U' R' F' R
+OLL11
+r' R2 U R' U R U2 R' U r R'
+OLL12
+F R U R' U' F' y F R U R' U' F'
+OLL13
+F U R U' R2 F' R U R U' R'
+OLL14
+R' F R U R' F' R y' R U' R'
+OLL15
+y2 l' U' l L' U' L U l' U l
+OLL16
+y2 r U r' R U R' U' r U' r'
+OLL17
+R U R' U (R' F R F') U2 (R' F R F')
+OLL18
+y' r U R' U R U2 r2' U' R U' R' U2 r
+OLL19
+r' U2 R U R' U r2 U2' R' U' R U' r'
+OLL20
+r' R U R U R' U' r2 R2' U R U' r'
+OLL21
+R U R' U R U' R' U R U2 R'
+OLL22
+R U2 R2' U' R2 U' R2' U2 R
+OLL23
+R2 D' R U2 R' D R U2 R
+OLL24
+r U R' U' L' U R U' x'
+OLL25
+y2 R' F R B' R' F' R B
+OLL26
+y2 R' U' R U' R' U2 R
+OLL27
+R U R' U R U2 R'
+OLL28
+r U R' U' r' R U R U' R'
+OLL29
+y2 R' F R F' R U2 R' d' L' U' L
+OLL30
+y2 F R' F R2 U' R' U' R U R' F2
+OLL31
+L' d' R d L U' L' B' L
+OLL32
+R d L' d' R' U R B R'
+OLL33
+R U R' U' R' F R F'
+OLL34
+R U R' U' x D' R' U R E' z'
+OLL35
+R U2 R2' F R F' R U2 R'
+OLL36
+R' U' R U' R' U R U R B' R' B
+OLL37
+x' U' R U l' U' R' U R
+OLL38
+L U L' U L U' L' U' L' B L B'
+OLL39
+L F' L' U' L U F U' L'
+OLL40
+R' F R U R' U' F' U R
+OLL41
+R U' R' U2 R U y R U' R' y' U' R'
+OLL42
+r' R2 y R U R' U' y' R' U M'
+OLL43
+f' L' U' L U f
+OLL44
+f R U R' U' f'
+OLL45
+F (R U R' U') F'
+OLL46
+R' U' R' F R F' U R
+OLL47
+F' L' U' L U L' U' L U F
+OLL48
+F R U R' U' R U R' U' F'
+OLL49
+R B' R2 F R2 B R2 F' R
+OLL50
+y2 R' F R2 B' R2 F' R2 B R'
+OLL51
+F U R U' R' U R U' R' F'
+OLL52
+R' U' R U' R' d R' U R B
+OLL53
+l' U' L U' L' U L U' L' U2 l
+OLL54
+r U R' U R U' R' U R U2 r'
+OLL55
+R U2 R2 U' R U' R' U2 F R F'
+OLL56
+r U r' U R U' R' U R U' R' r U' r'
+OLL57
+R U R' U' r R' U R U' r'
+H Permutation
+M2 U M2 U2 M2 U M2
+Ua Permutation
+M2 U M' U2 M U M2
+Ub Permutation
+M2 U' M' U2 M U' M2
+Z Permutation
+y x' R U' R' U D R' D U' R' U R D2' F x
+Aa Permutation
+R' F R' B2 R F' R' B2 R2
+Ab Permutation
+R B' R F2 R' B R F2 R2
+E Permutation
+x U R' U' L U R U' L' U R U' L U R' U' L'
+F Permutation
+(y2) R U' R' U R2 y R U R' U' x U' R' U R U2
+Ga Permutation
+(y) R2' u R' U R' U' R u' R2 y' R' U R
+Gc Permutation
+(y) R2' u' R U' R U R' u R2 y R U' R'
+Ja Permutation
+L' U' L F L' U' L U L F' L2 U L U
+Gd Permutation
+(y2) R U R' y' R2 u' R U' R' U R' u R2
+Gb Permutation
+R' U' R y R2 u R' U R U' R u' R2
+Jb Permutation
+R U2 R' U' R U2 L' U R' U' L
+Na Permutation
+R' U R2 B2 U R' B2' R U' B2 R2' U' R
+Nb Permutation
+R U' R2' F2 U' R F2' R' U F2 R2 U R'
+Ra Permutation
+y2 z U R2 U' R2 U F' U' R' U R U F U2 R
+Rb Permutation
+R' U2 R U2 R' F R U R' U' R' F' R2' U'
+T Permutation
+R U R' U' R' F R2 U' R' U' R U R' F'
+V Permutation
+R' U R' U' y x R' U' R2 x' U' R' U R' F R F
+Y Permutation
+F R U' R' U' R U R' F' R U R' U' R' F R F'
