@@ -65,7 +65,7 @@ RECHTS_GRIP = 3  # an die gewählten GPIO anpassen
 
 C180 = 1   # 1 = 180° Drehbewegung (mind. 270 ° Servo); else = 90° (standard)
 
-GRIPPER_MAX = 60
+GRIPPER_MAX = 50
 GRIPPER_MIN = 0
 TURN_MAX = 270   # max Drehwinkel des Servox  - limit for setup
 TURN_MIN = 0
@@ -77,19 +77,19 @@ OVERSHOOT = 0 #overshoot at turning
 
 TURN_MAX_left_grip = 180 + C180*90
 SERVO_PWM_left_grip = 2  # difference of servotiming in ms
-SERVO_OFFSET_left_grip = 0.5 # lower servo position in ms
+SERVO_OFFSET_left_grip = 0 # lower servo position in ms
 
 TURN_MAX_left_turn = 180 + C180*90
 SERVO_PWM_left_turn = 2  
-SERVO_OFFSET_left_turn = 0.5 
+SERVO_OFFSET_left_turn = 0 
 
 TURN_MAX_right_grip = 180 + C180*90
 SERVO_PWM_right_grip = 2   
-SERVO_OFFSET_right_grip = 0.5 
+SERVO_OFFSET_right_grip = 0 
 
 TURN_MAX_right_turn = 180 + C180*90
 SERVO_PWM_right_turn = 2   
-SERVO_OFFSET_right_turn = 0.5 
+SERVO_OFFSET_right_turn = 0 
 
 SCRAMBLE_MAX = 20
 
@@ -97,12 +97,12 @@ SCRAMBLE_MAX = 20
 IMG_BREITE = 1080 
 IMG_HOEHE = 1080
 
-top_row_pxl = 250  #values for cube detection
+top_row_pxl = 230  #values for cube detection
 mid_row_pxl = 500
-bot_row_pxl = 750
-lft_col_pxl = 200
+bot_row_pxl = 730
+lft_col_pxl = 230
 mid_col_pxl = 450
-rgt_col_pxl = 700
+rgt_col_pxl = 730
 
 wb_row_pxl = 980 #area for white balance
 wb_col_pxl = 890
@@ -536,7 +536,7 @@ def create_master_string():
     
 #______________________________________________________Drehkorrektur_______________________________________________
 
-def correct_righ	t(): #90° turn
+def correct_right(): #90° turn
     for x in range(len(solve_array)):
         solve_array[x] = solve_array[x].replace("U","X")    
         solve_array[x] = solve_array[x].replace("F","U")
@@ -1458,7 +1458,7 @@ def training():
     global now
     global Trainindex
 
-     Trainvalue = 1
+    Trainvalue = 1
 
     if Trainindex==0:
         Trainvalue = random.randint(1,train.Trainingliste)
