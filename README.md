@@ -21,6 +21,9 @@ https://www.speedsolving.com/wiki/index.php/Main_Page
 Starting with a solved cube, you can train a specific pattern or train by random generated tasks. Top color is not equal on all patterns - but that is what you need to train as well.
 You can change the training database by eding "Speedcubing.txt". 
 
+To start script on boot modify /etc/rc.local and insert following line just before 'exit 0'
+sudo -H -u pi python3 /home/pi/rubic_robot_en.py &
+
 
 Mechanical setup is placed on Thingiverse:
 https://www.thingiverse.com/thing:3826740
